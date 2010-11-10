@@ -108,11 +108,7 @@ class Controller
             $this->view,
             $this->driver
         );
-        if ($this->cacheKey)
-        {
-            $redis = Redisdb::singleton();
-            $redis->set($this->cacheKey, serialize($this->view));
-        }
+
         return $this->parsedViewResult;
 
     }
@@ -157,18 +153,6 @@ class Controller
     protected function setCache($key)
     {
         $this->cacheKey = $key;
-    }
-    
-    protected function cutIfCached($key)
-    {
-        $redis = Redisdb::singleton();
-        $cache = $redis->get($key);
-        if ($cache)
-        {
-            $this->view = unserialize($cache);
-            return true;
-        }
-        return false;
     }
 }
 ?>
