@@ -35,38 +35,11 @@ class layout_hook
 {
     public function __construct()
     {
-        /*
-        * Store user selected theme in the DB, pull it from the DB on auth
-        * and store it in a session var, otherwise don't use it at all <3
-        */
-        /*
-        // if the template configuration file is set load it and establish a
-        // layout instance
-        $customThemeLoaded = FALSE; // << Added that so I could stop using constant if-else statements
-
-        if (!empty($_COOKIE['theme'])) { // Only load if another theme is defined.
-            $theme = trim($_COOKIE['theme']);
-            
-            if (ctype_alnum($theme)) { // No funky biz.  Only alnum in theme titles.
-                if (file_exists($maind . 'application/layouts/' . $theme . '.php')) {
-                    $layout = new Layout($maind . 'application/layouts/' . $theme . '.php');
-                    $customThemeLoaded = TRUE;
-                    
-                    // Establish style and image folder urls
-                    $stylesheetUrl = $config->site->baseURL . "application/style/" . $theme . "/";
-                    $imagesUrl = $config->site->baseURL . "application/style/" . $theme . "/images/";
-                } // else: 1337 H4X04 used made up, but standard conforming name =/
-            } // else: 1337 H4X0r prbly tried to use . lolwut
-        }
-        */
-
-        //if ($customThemeLoaded == FALSE) {
         $GLOBALS['layout'] = new Layout(
-            $GLOBALS['maind'].'application/layouts/'.$GLOBALS['config']->layout->template
+            $GLOBALS['maind'].'application/layouts/main.php'
         );
         $GLOBALS['stylesheetUrl'] = '/hts/application/style/main/';
         $GLOBALS['imagesUrl'] = '/hts/application/style/main/images/';
-        //}
 
         $GLOBALS['mainImagesUrl'] = '/hts/application/images/';
     }

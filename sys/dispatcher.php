@@ -83,20 +83,12 @@ function __autoload($class_name)
 $hooks = HookHandler::singleton(
     array(
         'ini' => array(
-            'error_handling',
             'timer',
-            'time_zone',
-            'mongo',
-            'session',
-            'config',
-            'acl',
-            'notify',
             'layout',
             'dispatch'
         ),
         'end' => array(
             'layout_parse',
-            'last_dispatch'
         )
     )
 );
