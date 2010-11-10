@@ -45,18 +45,18 @@ class Controller
     // class wide error messages
     const E_404 = "404";
     
-	public function __construct($request, $viewData = 0, $silent = 0)
-	{  
+    public function __construct($request, $viewData = 0, $silent = 0)
+    {  
         if (is_array($viewData)) $this->view = $viewData;
         
-		// The setting of $silent to non zero will allow us to 
-		// initialize a controller object without implicitly calling
-		// a controller method, this is done by returning immediately.
+        // The setting of $silent to non zero will allow us to 
+        // initialize a controller object without implicitly calling
+        // a controller method, this is done by returning immediately.
         $this->request = $request;
-		if ($silent) return;	
+        if ($silent) return;    
         
-        $this->processRequest();	
-	}
+        $this->processRequest();    
+    }
     
     public function processRequest()
     {
@@ -73,24 +73,24 @@ class Controller
             $this->driver = 'traditional';
         }
         
-		// If no method was specified default to index
-		$method = (isset($this->request[0])) ? 
+        // If no method was specified default to index
+        $method = (isset($this->request[0])) ? 
                                              array_shift($this->request) 
                                              : 'index';
 
-		$this->__call($method, $this->request);
+        $this->__call($method, $this->request);
     }
-	
-	// A wrapper to call controller methods
-	public function __call($name, $arguments)
-	{ 
-		// Return with false if the controller method doesn't exist.
-		if (!method_exists($this, $name))
-		    return $this->setError('No such method:'.$name);
+    
+    // A wrapper to call controller methods
+    public function __call($name, $arguments)
+    { 
+        // Return with false if the controller method doesn't exist.
+        if (!method_exists($this, $name))
+            return $this->setError('No such method:'.$name);
 
         $controller = substr(get_class($this), 0, -11);
-	    // Set the implicit view
-	    $this->setView($controller.'_'.$name);
+        // Set the implicit view
+        $this->setView($controller.'_'.$name);
         
         
         // Journal this dispatch for reference later
@@ -99,11 +99,11 @@ class Controller
             array_merge(array($name), $arguments)
         );
 
-		// Call the actual function.
-		$this->$name($arguments);
+        // Call the actual function.
+        $this->$name($arguments);
         
-		// Load and parse view
-		$this->parsedViewResult = new View(
+        // Load and parse view
+        $this->parsedViewResult = new View(
             $this->controllerState['view'], 
             $this->view,
             $this->driver
@@ -115,21 +115,21 @@ class Controller
         }
         return $this->parsedViewResult;
 
-	}
+    }
 
-	// A method to call static controller methods
+    // A method to call static controller methods
     public static function __callStatic($name, $arguments)
-	{
-	//	!!!!!!!!!!!!!!!!!!! FINISH ME!!!!!!!!!!!!!!
-	}
-	
+    {
+    //  !!!!!!!!!!!!!!!!!!! FINISH ME!!!!!!!!!!!!!!
+    }
+    
     public function getResult()
     {
         return $this->parsedViewResult;
     }
     
-	public function setView($view)
-	{
+    public function setView($view)
+    {
         $this->controllerState['view'] = $view;
     }
     

@@ -33,68 +33,68 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 class View
 {
-	private $viewPath = '';
-	private $data = array();
+    private $viewPath = '';
+    private $data = array();
     private $parsed;
-	
-	public function __construct($viewPath, $data = false, $driver = 'traditional')
-	{
+    
+    public function __construct($viewPath, $data = false, $driver = 'traditional')
+    {
         
-		$this->viewPath = $GLOBALS['maind'];
+        $this->viewPath = $GLOBALS['maind'];
         $this->viewPath .= 'application/views/';
         $this->viewPath .= $viewPath;
         $this->viewPath .= '.php';
         
         $this->driver = $driver.'_view_driver';
         
-		// If view data is supplied as an array, merge it with the view data.
-		// We merge instead of set because the constructor may be called by
-		// the __invoke() magical routine.
-		if (is_array($data))  $this->data = array_merge($this->data, $data);
-	}
-	
-	// Wrapper for getting view variables
-	public function &__get($name)
-	{
-		return (isset($this->data[$name])) ? $this->data[$name] : false;
-	}
+        // If view data is supplied as an array, merge it with the view data.
+        // We merge instead of set because the constructor may be called by
+        // the __invoke() magical routine.
+        if (is_array($data))  $this->data = array_merge($this->data, $data);
+    }
+    
+    // Wrapper for getting view variables
+    public function &__get($name)
+    {
+        return (isset($this->data[$name])) ? $this->data[$name] : false;
+    }
 
-	// Wrapper for setting view variables
+    // Wrapper for setting view variables
     public function __set($name, $value)
-	{
+    {
         $this->data[$name] = $value;
     }
 
-	// This function does the heavy lifting for the view.
-	public function parse()
-	{
+    // This function does the heavy lifting for the view.
+    public function parse()
+    {
         if ($this->parsed) return $this->parsed;
         
         $v = $this->driver;
         $driver = new $v();
-		$this->parsed = $driver->parse($this->viewPath, $this->data);
-		
-		return $this->parsed;
-		
-	}
-	
-	/*
-	* This function gets 'invoked' automagically when an object
-	* of type view is called as if it were a function. The expected
-	* result is to load the array $data into the view, parse the views
-	* display logic and return the results.
-	* It's syntactic sugar for loading an array worth of data into the 
-	* view and parsing it.
-	*/
-	public function __invoke($data = false)
-	{
-		if (is_array($data)) $this->__construct($this->viewPath, $data);
-		return $this->parse();
-	}
-	
-	public function __toString()
-	{
-		return $this->parse();
-	}
+        $this->parsed = $driver->parse($this->viewPath, $this->data);
+        
+        return $this->parsed;
+        
+    }
+    
+    /*
+    * This function gets 'invoked' automagically when an object
+    * of type view is called as if it were a function. The expected
+    * result is to load the array $data into the view, parse the views
+    * display logic and return the results.
+    * It's syntactic sugar for loading an array worth of data into the 
+    * view and parsing it.
+    */
+    public function __invoke($data = false)
+    {
+        if (is_array($data)) $this->__construct($this->viewPath, $data);
+        return $this->parse();
+    }
+    
+    public function __toString()
+    {
+        return $this->parse();
+    }
 }
 ?>
