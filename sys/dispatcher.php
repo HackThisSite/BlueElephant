@@ -40,10 +40,10 @@ $maind = getcwd().'/../';
 set_include_path(get_include_path() . PATH_SEPARATOR . $maind.'library');
 function __autoload($class_name)
 {
-	global $maind;
-	
-	if ($class_name[0] == strtoupper($class_name[0]))
-	{
+    global $maind;
+    
+    if ($class_name[0] == strtoupper($class_name[0]))
+    {
         if (strpos($class_name, 'Zend') === 0)
         {
             require_once str_replace('_', '/', $class_name).'.php';
@@ -54,30 +54,30 @@ function __autoload($class_name)
             if (file_exists($maind.'library/'.$class_name.'.php'))
                 require_once $class_name.'.php';
         }
-	}
-	else if (substr($class_name, -11) == '_controller')
-	{
-	    $class_name = substr($class_name, 0, -11);
-		if (file_exists($maind.'application/controllers/'.$class_name.'.php'))
-			require_once $maind.'application/controllers/'.$class_name.'.php';
-	}
+    }
+    else if (substr($class_name, -11) == '_controller')
+    {
+        $class_name = substr($class_name, 0, -11);
+        if (file_exists($maind.'application/controllers/'.$class_name.'.php'))
+            require_once $maind.'application/controllers/'.$class_name.'.php';
+    }
     else if (substr($class_name, -5) == '_hook')
-	{
-	    $class_name = substr($class_name, 0, -5);
-		if (file_exists($maind.'application/hooks/'.$class_name.'.php'))
-			require_once $maind.'application/hooks/'.$class_name.'.php';
-	}
+    {
+        $class_name = substr($class_name, 0, -5);
+        if (file_exists($maind.'application/hooks/'.$class_name.'.php'))
+            require_once $maind.'application/hooks/'.$class_name.'.php';
+    }
     else if (substr($class_name, -7) == '_driver')
-	{
-	    list($class_name, $type) = explode('_', $class_name);
-		if (file_exists($maind.'drivers/'.$type.'/'.$class_name.'.php'))
-			require_once $maind.'drivers/'.$type.'/'.$class_name.'.php';
-	}
-	else
-	{
-		if (file_exists($maind.'application/models/'.$class_name.'.php'))
-			require_once $maind.'application/models/'.$class_name.'.php';
-	}
+    {
+        list($class_name, $type) = explode('_', $class_name);
+        if (file_exists($maind.'drivers/'.$type.'/'.$class_name.'.php'))
+            require_once $maind.'drivers/'.$type.'/'.$class_name.'.php';
+    }
+    else
+    {
+        if (file_exists($maind.'application/models/'.$class_name.'.php'))
+            require_once $maind.'application/models/'.$class_name.'.php';
+    }
 }
 
 $hooks = HookHandler::singleton(

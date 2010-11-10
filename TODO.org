@@ -1,0 +1,5 @@
+* TODO Migrate the __autoload lazy loading to SPL
+* TODO Create an autoload class
+* TODO Reimplement the config system
+* TODO Design a simple yet more documenting hello world
+* TODO implement XML and XSL view drivers
