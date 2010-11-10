@@ -8,7 +8,7 @@ Why should i care?
 ------------------
  Blue Elephant is designed to be used by high performance web servers 
 leveraging FastCGI (typically via php-fpm) to scale extremely well. The
-framework also has very lightweight foot print, which is critical for
+framework also has a very lightweight foot print, which is critical for
 speed and memory overhead in most scripting languages.
 
 Why no model system?
