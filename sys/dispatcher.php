@@ -29,56 +29,116 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
 * Authors:
 *   Thetan ( Joseph Moniz )
-*   Bren2010 ( Brendan Mc. )
 **/
 
 
 $maind = getcwd().'/../';
 
-// Create the autoload function that will lazily load
-// libraries, models and views
 set_include_path(get_include_path() . PATH_SEPARATOR . $maind.'library');
-function __autoload($class_name)
+
+class lazyLoader
 {
-    global $maind;
+    private static $instance;
+
+    private function __construct($hooks = false)
+    {
+        spl_autoload_register(null, false);
+        spl_autoload_extensions('.php');
+        spl_autoload_register(array($this, 'model'));
+        // view loading is handled automatically by the view class
+        spl_autoload_register(array($this, 'controller'));
+        spl_autoload_register(array($this, 'library'));
+        spl_autoload_register(array($this, 'hook'));
+        spl_autoload_register(array($this, 'driver'));
+    }
     
-    if ($class_name[0] == strtoupper($class_name[0]))
+    public function model($name)
     {
-        if (strpos($class_name, 'Zend') === 0)
+        if ($name[0] == strtoupper($name[0]))
+            return false;
+        
+        $main = $GLOBALS['maind'];
+        $file = "{$main}application/models/{$name}.php";
+        if (!file_exists($file))
+            return false;
+        
+        include $file;
+    }
+    
+    public function controller($name)
+    {
+        if (substr($name, -11) != '_controller')
+            return false;
+        
+        $main = $GLOBALS['maind'];
+        $name = substr($name, 0, -11);
+        $file = "{$main}application/controllers/{$name}.php";
+        if (!file_exists($file))
+            return false;
+        
+        include $file;
+    }
+    
+    public function library($name)
+    {
+        if ($name[0] != strtoupper($name[0]))
+            return false;
+        
+        $name = strtolower($name);
+        $main = $GLOBALS['maind'];
+        $file = "{$main}library/{$name}.php";
+        if (!file_exists($file))
+            return false;
+            
+        include $file;
+    }
+    
+    public function hook($name)
+    {
+        if (substr($name, -5) != '_hook')
+            return false;
+        
+        $main = $GLOBALS['maind'];
+        $name = substr($name, 0, -5);
+        $file = "{$main}application/hooks/{$name}.php";
+        if (!file_exists($file))
+            return false;
+        
+        include $file;
+    }
+    
+    public function driver($name)
+    {
+        if (substr($name, -7) != '_driver')
+            return false;
+            
+        list($name, $type) = explode('_', $name);
+        
+        $main = $GLOBALS['maind'];
+        $file = "{$main}drivers/{$type}/{$name}.php";
+        if (!file_exists($file))
+            return false;
+        
+        include $file;
+    }
+    
+    public static function initialize($hooks = false) 
+    {
+        if (!isset(self::$instance))
         {
-            require_once str_replace('_', '/', $class_name).'.php';
+            $thisClass = __CLASS__;
+            self::$instance = new $thisClass($hooks);
         }
-        else
-        {
-            $class_name = strtolower($class_name);
-            if (file_exists($maind.'library/'.$class_name.'.php'))
-                require_once $class_name.'.php';
-        }
+        return self::$instance;
     }
-    else if (substr($class_name, -11) == '_controller')
+    
+    public function __clone()
     {
-        $class_name = substr($class_name, 0, -11);
-        if (file_exists($maind.'application/controllers/'.$class_name.'.php'))
-            require_once $maind.'application/controllers/'.$class_name.'.php';
-    }
-    else if (substr($class_name, -5) == '_hook')
-    {
-        $class_name = substr($class_name, 0, -5);
-        if (file_exists($maind.'application/hooks/'.$class_name.'.php'))
-            require_once $maind.'application/hooks/'.$class_name.'.php';
-    }
-    else if (substr($class_name, -7) == '_driver')
-    {
-        list($class_name, $type) = explode('_', $class_name);
-        if (file_exists($maind.'drivers/'.$type.'/'.$class_name.'.php'))
-            require_once $maind.'drivers/'.$type.'/'.$class_name.'.php';
-    }
-    else
-    {
-        if (file_exists($maind.'application/models/'.$class_name.'.php'))
-            require_once $maind.'application/models/'.$class_name.'.php';
+        die('Error: Can not be cloned.');
     }
 }
+
+lazyLoader::initialize();
 
 $hooks = HookHandler::singleton(
     array(
