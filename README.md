@@ -1,19 +1,23 @@
 Blue Elephant
 =============
- Blue Elelephant aims to be a simple no *BS* straight forward MVC like web 
-framework. Emphasis on _MVC like_ as we purposefully ommit the M in MVC from
+ Blue Elephant aims to be a simple no *BS* straight forward MVC like web
+framework. Emphasis on _MVC like_ as we purposefully omit the M in MVC from
 this framework to get out of the way of developers.
 
-Why should i care?
+How's  performance?
 ------------------
- Blue Elephant is designed to be used by high performance web servers 
-leveraging FastCGI (typically via php-fpm) to scale extremely well. The
+ Blue Elephant is designed to be used by high performance web servers
+leveraging FastCGI (typically via php-fpm) to scale extremely well. Everything
+is 'lazily loaded' by default, meaning classes are not loaded until the	very
+last minute they're needed and only what is used will be loaded. The
 framework also has a very lightweight foot print, which is critical for
-speed and memory overhead in most scripting languages.
+speed and memory overhead in most scripting languages. These three simple
+principals combined make up a vicious recipe for creating high performance
+php web	applications.
 
 Why no model system?
 --------------------
- Where not against model systems. We find them outstanding for niche purposes.
-However, we find them annoying and counterproductive when used as blanket 
-paradigms. So instead we simply leave it up to the end developer wether to use
+ We're not against model systems. We find them outstanding for niche purposes.
+However, we find them annoying and counterproductive when used as blanket
+paradigms. So instead we simply leave it up to the end developer whether to use
 models are not and how to go about it.
