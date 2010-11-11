@@ -1,8 +1,8 @@
 * Tasks in queue
-** TODO Create an autoload class
 ** TODO Reimplement the config system
 ** TODO Design a simple yet more documenting hello world
 ** TODO implement XML and XSL view drivers
 
 * Tasks completed in chronological order (reverse)
+** DONE Create an autoload class
 ** DONE Migrate the __autoload lazy loading to SPL
