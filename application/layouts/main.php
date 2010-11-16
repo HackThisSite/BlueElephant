@@ -5,4 +5,4 @@
  <body>
   <?php echo $page_content; ?>
  </body>
-</html
+</html>
