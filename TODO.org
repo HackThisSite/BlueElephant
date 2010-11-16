@@ -1,14 +1,14 @@
 * Tasks in queue
+** TODO Design a simple yet more documenting hello world
+** TODO implement XML and XSL view drivers
+
+* Tasks completed in chronological order (reverse)
 ** TODO Make the config system environment variable dependent
    The presence of a given environment variable should be the deciding factor
 on which group of configurations get used. This will allow for smoother
 transitions between development, staging and production stages.
-** TODO Design a simple yet more documenting hello world
-** TODO implement XML and XSL view drivers
-* Tasks completed in chronological order (reverse)
 ** DONE Reimplement the config system
    The config system should be PHP based, not .ini and it should be
    include()'d so APC can cache it and minimize disk hits for performance
-
 ** DONE Create an autoload class
 ** DONE Migrate the __autoload lazy loading to SPL
