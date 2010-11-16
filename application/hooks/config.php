@@ -37,7 +37,18 @@ class config_hook
     {
         $file = $GLOBALS['maind'].'application/configs/config.php';
         include $file;
-        $GLOBALS['config'] = $config['dev'];
-        //print_r($GLOBALS['config']);
+	
+        if ($env = getenv('BE_CONFIG'))
+        {
+            if ($config[$env])
+            {
+                $GLOBALS['config'] = $config[$env];
+            }
+            else if ($config['dev'])
+            {
+                $GLOBALS['dev'] = $config['dev'];
+            }
+        }
+        $GLOBALS['config'] = array();
     }
 }

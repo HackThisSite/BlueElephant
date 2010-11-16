@@ -143,6 +143,7 @@ lazyLoader::initialize();
 $hooks = HookHandler::singleton(
     array(
         'ini' => array(
+            'config',
             'timer',
             'layout',
             'dispatch'
