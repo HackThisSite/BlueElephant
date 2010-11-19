@@ -145,11 +145,11 @@ $hooks = HookHandler::singleton(
         'ini' => array(
             'config',
             'timer',
-            'layout',
+            //'layout',
             'dispatch'
         ),
         'end' => array(
-            'layout_parse',
+            //'layout_parse',
         )
     )
 );
