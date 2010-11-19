@@ -1,8 +1,12 @@
+Benchmark
+========
+
 Apache Without APC
 ==================
 
 Run #1
 ------
+
 Document Path:          /phpmark/blueelephant/
 Requests per second:    679.03 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -16,9 +20,9 @@ Requests per second:    138.13 [#/sec] (mean)
 Document Path:          /phpmark/zend-1.10.8/index.php
 Requests per second:    144.13 [#/sec] (mean)
 
-
 Run #2
 ------
+
 Document Path:          /phpmark/blueelephant/
 Requests per second:    631.20 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -34,6 +38,7 @@ Requests per second:    81.11 [#/sec] (mean)
 
 Run #3
 ------
+
 Document Path:          /phpmark/blueelephant/
 Requests per second:    729.09 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -53,6 +58,7 @@ Apache With APC
 
 Run #1
 ------
+
 Document Path:          /phpmark/blueelephant/
 Requests per second:    1338.74 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -69,6 +75,7 @@ Requests per second:    537.56 [#/sec] (mean)
 
 Run #2
 ------
+
 Document Path:          /phpmark/blueelephant/
 Requests per second:    1461.63 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -83,6 +90,7 @@ Document Path:          /phpmark/zend-1.10.8/index.php
 Requests per second:    465.39 [#/sec] (mean)
 
 Run #3
+
 ------
 Document Path:          /phpmark/blueelephant/
 Requests per second:    1370.70 [#/sec] (mean)
@@ -103,6 +111,7 @@ Nginx with PHP-FPM without APC
 
 Run #1
 ------
+
 Document Path:          /phpmark/blueelephant/sys/dispatcher.php
 Requests per second:    615.85 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -118,6 +127,7 @@ Requests per second:    145.03 [#/sec] (mean)
 
 Run #2
 ------
+
 Document Path:          /phpmark/blueelephant/sys/dispatcher.php
 Requests per second:    611.15 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -144,6 +154,7 @@ Requests per second:    81.69 [#/sec] (mean)
 
 Run #3
 ------
+
 Document Path:          /phpmark/blueelephant/sys/dispatcher.php
 Requests per second:    615.27 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -163,6 +174,7 @@ Nginx with PHP-FPM with APC
 
 Run #1
 ------
+
 Document Path:          /phpmark/blueelephant/sys/dispatcher.php
 Requests per second:    1485.92 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -178,6 +190,7 @@ Requests per second:    526.70 [#/sec] (mean)
 
 Run #2
 ------
+
 Document Path:          /phpmark/blueelephant/sys/dispatcher.php
 Requests per second:    1631.58 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
@@ -193,6 +206,7 @@ Requests per second:    554.75 [#/sec] (mean)
 
 Run #3
 ------
+
 Document Path:          /phpmark/blueelephant/sys/dispatcher.php
 Requests per second:    1495.36 [#/sec] (mean)
 Document Path:          /phpmark/cakephp-1.3.4/app/webroot/index.php/benchmark
