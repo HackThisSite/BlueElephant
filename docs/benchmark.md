@@ -1,6 +1,15 @@
 Benchmark
 ========
 
+Average Requests per Second
+===========================
+
+![apache](http://chart.apis.google.com/chart?chxl=0:|BlueElephant|CakePHP|CodeIgniter|Symfony|Yii|Zend&chxr=0,0,6|1,0,2000&chxt=x,y&chbh=24,1,42&chs=760x300&cht=bvg&chco=000000,4D89F9&chd=s:VBGCED,qFeGYP&chdl=without+APC|With+APC&chma=|0,5&chtt=PHP+Framework+Benchmark+W/+Apache)
+![nginx](http://chart.apis.google.com/chart?chxl=0:|BlueElephant|CakePHP|CodeIgniter|Symfony|Yii|Zend&chxr=0,0,6|1,0,2000&chxt=x,y&chbh=24,1,42&chs=760x300&cht=bvg&chco=000000,4D89F9&chd=s:TBGBFE,vHhKdR&chdl=Without+APC|With+APC&chtt=PHP+Framework+Benchmark+W%2F+Nginx)
+
+The Raw Results
+===============
+
 Apache Without APC
 ==================
 
