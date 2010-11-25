@@ -56,7 +56,7 @@ class HookHandler
     
     public function runHooks($hook)
     {
-        if (!$this->hooks[$hook]) return;
+        if (empty($this->hooks[$hook])) return;
         foreach ($this->hooks[$hook] as $h)
         {
             $obj = new $h();

@@ -31,7 +31,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *   Thetan ( Joseph Moniz )
 **/
 
-
 $maind = getcwd().'/../';
 
 set_include_path(get_include_path() . PATH_SEPARATOR . $maind.'library');
@@ -145,11 +144,11 @@ $hooks = HookHandler::singleton(
         'ini' => array(
             'config',
             'timer',
-            //'layout',
+            'layout',
             'dispatch'
         ),
         'end' => array(
-            //'layout_parse',
+            'layout_parse',
         )
     )
 );

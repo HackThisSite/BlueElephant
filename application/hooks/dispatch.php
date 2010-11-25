@@ -40,7 +40,10 @@ class dispatch_hook
             $controller .= '_controller';
             if (class_exists($controller))
             {
-                $state = new $controller(empty($request[0]) ? array(0 => "index") : $request);
+                if (empty($request[0])) $request = array(0 => "index");
+                if (!method_exists($controller, $request[0])) $request = array_merge(array(0 => 'index'), $request);
+                
+                $state = new $controller($request);
                 $GLOBALS['errors'] = $state->getErrors();
                 
                 if (!$standAlone)

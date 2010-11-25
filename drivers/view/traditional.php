@@ -3,6 +3,8 @@ class traditional_view_driver
 {
 	public function parse($view, $data)
 	{
+		if (!file_exists($view)) return file_get_contents($GLOBALS['maind'] . 'application/errors/4045.php');
+		
         // Save the current output buffer to restore it later.
 		$saved = ob_get_clean();
 		

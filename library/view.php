@@ -54,7 +54,7 @@ class View
     }
     
     // Wrapper for getting view variables
-    public function &__get($name)
+    public function __get($name)
     {
         return (isset($this->data[$name])) ? $this->data[$name] : false;
     }
