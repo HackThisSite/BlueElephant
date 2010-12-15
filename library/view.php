@@ -37,15 +37,19 @@ class View
     private $data = array();
     private $parsed;
     
+    const VIEW_PATH = 'application/views/';
+    const VIEW_EXT = '.php';
+    const DRIVER_SUFFIX = '_view_driver';
+    
     public function __construct($viewPath, $data = false, $driver = 'traditional')
     {
         
         $this->viewPath = $GLOBALS['maind'];
-        $this->viewPath .= 'application/views/';
+        $this->viewPath .= self::VIEW_PATH;
         $this->viewPath .= $viewPath;
-        $this->viewPath .= '.php';
+        $this->viewPath .= self::VIEW_EXT;
         
-        $this->driver = $driver.'_view_driver';
+        $this->driver = $driver . self::DRIVER_SUFFIX;
         
         // If view data is supplied as an array, merge it with the view data.
         // We merge instead of set because the constructor may be called by

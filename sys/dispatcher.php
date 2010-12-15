@@ -158,7 +158,6 @@ if (!$_GET['r']) $_GET['r'] = 'index/index';
 $request = explode('/', $_GET['r']);
 $controller = array_shift($request);
 
-
 dispatch($controller, $request, false, true);
 
 $hooks->runHooks('end');

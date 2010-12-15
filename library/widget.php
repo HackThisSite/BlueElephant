@@ -31,16 +31,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 *   Thetan ( Joseph Moniz )
 **/
 
-class layout_hook
+class Widget extends View
 {
-    public function __construct()
+    const WIDGET_PATH = '../widgets/';
+    
+    public function __construct($viewPath, $data = false, $driver = 'traditional')
     {
-        $GLOBALS['layout'] = new Layout(
-            $GLOBALS['maind'].'application/layouts/main.php'
-        );
-        $GLOBALS['stylesheetUrl'] = '/hts/application/style/main/';
-        $GLOBALS['imagesUrl'] = '/hts/application/style/main/images/';
-
-        $GLOBALS['mainImagesUrl'] = '/hts/application/images/';
+        parent::__construct(self::WIDGET_PATH . $viewPath, $data, $driver);
     }
 }
