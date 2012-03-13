@@ -8,9 +8,9 @@
    <p align="right"> 
     Blue Elephant Framework
    </p>
-   <?php echo $page_content; ?> 
+     <?php echo $page_content; ?>
    <p>
-    Page loaded in <?php echo substr((string)$GLOBALS['globalPageTimer'], 0, 5); ?> seconds.
+   Page loaded in <?php echo Layout::get("pageExecutionTime"); ?> seconds.
    </p>
   </div> 
  </body>

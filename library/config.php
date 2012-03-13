@@ -61,11 +61,14 @@ class Config
         self::forceReload($isLoadedKey);
     }
 
-    static public function forceReload($isLoadedkey = null)
+    static public function forceReload($isLoadedKey = null)
     {
         // load the local configs for this server based on hostname
         $configBase = dirname(dirname(__FILE__)) . self::DIR_CONF_BASE;
-        $serverConf = self::_loadConfigsRecursively($configBase . self::DIR_SERVER_BASE . gethostname());
+        $serverConf = self::_loadConfigsRecursively( $configBase
+                                                   . self::DIR_SERVER_BASE
+                                                   . gethostname()
+                                                   );
         $initialConf = array_merge(
             (is_array($serverConf)) ? $serverConf : array(),
             self::_loadConfigsRecursively($configBase . self::DIR_LOCAL_BASE)
@@ -84,7 +87,10 @@ class Config
 
         $finalConf = array_merge(
             self::_loadConfigsRecursively($configBase . self::DIR_COMMON_BASE),
-            self::_loadConfigsRecursively($configBase . self::DIR_ENV_BASE . $initialConf[self::ENVIRONMENT_KEY]),
+            self::_loadConfigsRecursively( $configBase
+                                         . self::DIR_ENV_BASE
+                                         . $initialConf[self::ENVIRONMENT_KEY]
+                                         ),
             $initialConf
         );
 
@@ -109,6 +115,10 @@ class Config
      */
     static private function _loadConfigsRecursively($path)
     {
+        if (!is_dir($path)) {
+            return array();
+        }
+
         $configs = array();
         $files   = array_diff(
             scandir($path),

@@ -1,6 +1,6 @@
 <?php
 
-class index_controller extends Controller
+class controller_index extends Controller
 {
     public function index($arguments)
     {

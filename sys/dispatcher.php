@@ -159,7 +159,8 @@ class lazyLoader
         $key    = self::PREFIX . self::PREFIX_EVENT . $name;
         $cached = apc_fetch($key);
 
-        if ($cached === null) {
+        if ($cached === null)
+        {
             return false;
         }
         if ($cached !== false)
@@ -198,6 +199,7 @@ class lazyLoader
         if ($cached === null) {
             return false;
         }
+
         if ($cached !== false)
         {
             apc_store(self::PREFIX . $name, $cached);
@@ -214,6 +216,7 @@ class lazyLoader
 
         $name = substr($name, 7, -5);
         $file = "{$this->root}drivers/{$name}.php";
+
         if (!file_exists($file))
         {
             apc_store(self::PREFIX . $name, null);
@@ -244,16 +247,19 @@ class lazyLoader
 
 lazyLoader::initialize();
 
+//apc_clear_cache("user");
+//Config::forceReload();
+
 $observer = Observer::singleton(
     array(
-        'request/received' => array(
-            'timer',
-            'layout',
-            'dispatch'
+        "request/received" => array(
+            "timer",
+            "layout",
+            "dispatch"
         ),
-        'request/ended' => array(
-            'timer',
-            'layout'
+        "request/ended" => array(
+            "timer",
+            "layout"
         )
     )
 );

@@ -1,71 +1,79 @@
 <?php 
 /**
-Copyright (c) 2010, HackThisSite.org
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-    * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
-    * Neither the name of the HackThisSite.org nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS IS'' AND ANY
-EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/**
 * Authors:
-*   Thetan ( Joseph Moniz )
+*   lohkey ( Joseph Moniz )
 **/
 
 class Layout
 {
-    private $layoutPath = '';
-    
-    public function __construct($layoutPath)
+    const FOLDER_LAYOUTS   = "/application/layouts/";
+    const LAYOUT_EXTENSION = ".php";
+
+    private static $layout  = "";
+    public static $data = array();
+
+    /**
+     * Used to set layout parameters
+     * @param key $key
+     * @param mixed $value
+     */
+    public static function set($key, $value)
     {
-        // Save the layout path for JiT parsing
-        $this->layoutPath = $layoutPath;
+        self::$data[$key] = $value;
     }
-    
-    // Make the magic happen babeeh.
-    public function parse()
+
+    /**
+     * Used to fetch layout parameters
+     * @param string $key
+     */
+    public static function get($key)
     {
-        // Import all global variables
-        // NOTE: We should make this more explicit
-        //       later on.
-        extract($GLOBALS);
-        
+        return (isset(self::$data[$key])) ? self::$data[$key] : false;
+    }
+
+    /**
+     * This function is used to select the layout set to use
+     * @param string $layout
+     */
+    public static function selectLayout($layout)
+    {
+        self::$layout = $layout;
+    }
+
+    public static function getLayout()
+    {
+        return self::$layout;
+    }
+
+    /**
+     * Renders the templage
+     */
+    public static function render()
+    {
+        // Import all template variables
+        extract(self::$data);
+
         // Store the contents of the current output
         // buffer in $page_content so it can be accessed
         // from within the layout view as such. Then load
         // and parse the selected layout, returning the
         // results.
         $page_content = ob_get_clean();
-        ob_start();
-        require_once $this->layoutPath;
+
+        ob_start("ob_gzhandler");
+        require_once dirname(dirname(__FILE__))
+                   . self::FOLDER_LAYOUTS
+                   . self::$layout
+                   . self::LAYOUT_EXTENSION;
+
         return ob_get_clean();
     }
-    
-    // Any use of this object as a string type
-    // (passing to echo and such) will result in
-    // this function being returned.
+
+    /**
+     * Typical string conversion
+     */
     public function __toString()
     {
         return $this->parse();
     }
 }
-?>

@@ -48,6 +48,7 @@ class events_request_received_dispatch
         }
 
         // pass the request to the controller and return the result
-        Layout::set("content", new $controller($request));
+        $result = new $controller($request);
+        echo $result->getResult();
     }
 }
